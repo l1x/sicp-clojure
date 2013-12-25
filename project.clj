@@ -10,6 +10,7 @@
     [org.clojure/clojure            "1.5.1"]
     [org.clojure/tools.logging      "0.2.6"]
     [org.clojure/math.combinatorics "0.0.7"]
+    [org.clojure/math.numeric-tower "0.0.2"]
   ]
   :jvm-opts [
     "-Xms128m" "-Xmx256m" "-server" "-XX:MaxPermSize=64m"

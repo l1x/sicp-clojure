@@ -1,5 +1,6 @@
 (ns sicp-clojure.core
   (:gen-class)
+  (:require [clojure.math.numeric-tower :as math])
   (:use [clojure.tools.logging  :only [info error ]]
         [clojure.repl           :only [source     ]]))
 ;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;TRACE;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
@@ -228,8 +229,35 @@
 ;end chapter4
 )
 
-(defn chapter5 [] 
-  ()
+(defn chapter5 []
+  ;2 to the power of 4 equals 16 
+  ;2^4=16 a^b
+  (defn power-of 
+    ;time:O(n), space:O(n)
+    [a b] 
+    (if (= b 0)
+      1
+    ;else
+      (* a (power-of a (- b 1)))))
+
+  (defn power-of-lin [a b]
+    ;time:O(n), space:O(1)
+    (defn expt-iter [a counter product]
+      (if (= counter 0)
+        product
+      ;else
+        (expt-iter a (- counter 1) (* a product))))
+    (expt-iter a b 1))
+
+  (defn fast-expt [a b]
+    (cond 
+      (= b 0) 
+        1
+      (even? b) 
+        (math/expt (fast-expt a (/ b 2)) 2)
+      :else 
+        (* a (fast-expt a (- b 1)))))
+
 ;end chapter5
 )
 
@@ -300,7 +328,9 @@
     ;292
 
   (chapter5)
-    (info '() ())
+    (info "teszt")
+    (info '(power-of 2 100) (time (power-of 2N 100N)))
+    (info '(fast-expt 2 100) (time (fast-expt 2N 100N)))
 ;end
 )
 
