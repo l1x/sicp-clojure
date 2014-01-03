@@ -22,12 +22,12 @@
     (expt-iter a b 1))
 
   (defn fast-expt [a b]
-    (defn c5-square [x] (* x x))
+    (defn c3-square [x] (* x x))
     (cond 
       (= b 0) 
         1
       (even? b) 
-        (c5-square (fast-expt a (/ b 2)))
+        (c3-square (fast-expt a (/ b 2)))
       :else 
         (* a (fast-expt a (- b 1)))))
 
